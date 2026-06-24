@@ -55,11 +55,20 @@ class CourseRegistrationManager:
             if tuition_fee <= 0:
                 print("Học phí phải lớn hơn 0")
                 return
+            if tuition_fee == "":
+                print("không được để trống")
+                return
             discount = float(input("Nhập giảm giá: "))
+            if discount == "":
+                print(" không được để trống")
+                return
             if discount < 0:
                 print("Giảm giá không được âm")
                 return
             extra_fee = float(input("Nhập phụ phí: "))
+            if extra_fee == "":
+                print(" không được để trống")
+                return
             if extra_fee < 0:
                 print("Phụ phí không được âm")
                 return
@@ -131,34 +140,24 @@ class CourseRegistrationManager:
                     print("Đã hủy")
 
                 return
-
         print("Không tìm thấy")
-
     def search_registration(self):
         if len(self.registrations) == 0:
             print("Danh sách rỗng")
             return
-
         keyword = input("Nhập tên học viên cần tìm: ").lower()
-
         found = False
-
         for registration in self.registrations:
             if keyword in registration.student_name.lower():
                 found = True
                 print(registration.id, registration.student_name, registration.course_name)
-
         if not found:
             print("Không tìm thấy")
-
-
 def main():
     student = CourseRegistrationManager()
-
     student.registrations.append(
         CourseRegistration("001", "Nguyễn Văn An", "Python Basic", 1000000, 100000, 100000)
     )
-
     student.registrations.append(
         CourseRegistration("002", "Trần Thị Bình", "Python Web Service", 2000000, 200000, 200000)
     )
@@ -194,6 +193,5 @@ def main():
                 break
             case _:
                 print("Chọn không đúng chức năng, vui lòng chọn từ 1-6")
-
 
 main()
